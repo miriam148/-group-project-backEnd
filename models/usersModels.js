@@ -25,13 +25,12 @@ const userSchema = new Schema({
     maxLength: [9, 'El teléfono  no puede superar los 9 caracteres'],
     trim: true
   },
-  address: {
+
     road: { type: String, required: true, trim: true},
     postCode: { type: String, required: true, trim: true,  minLength: [5, 'El código postal  debe tener al menos 5 caracteres'],
         maxLength: [5, 'El código postal  no puede superar los 5 caracteres'], },
     city: { type: String, required: true, trim: true},
     
-  },
   email: {
     type: String,
     required: [true, "El email es obligatorio"],
@@ -48,6 +47,11 @@ const userSchema = new Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  subscription: {
+    type: String,
+    required: [true, "la suscripción es obligatoria"],
+
+  },
   favoritas: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "movie",
@@ -56,6 +60,7 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now()
   }
+
 });
 
 

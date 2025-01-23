@@ -12,14 +12,6 @@ const addUser = async (req, res) => {
 }
 
 
-const getUser = async (req, res) => {
-    try {
-        const user = await userModel.find()
-        res.status(200).send(user)
-    } catch (error) {
-        res.status(500).send({ status : 'failed', error: error.message})
-    }
-}
 
 
 const deleteUser = async (req, res) => {
@@ -68,4 +60,4 @@ const getById = async (req, res) => {
 
 
 
-module.exports = { getUser, addUser, deleteUser, updateUser, getById }
+module.exports = { addUser, deleteUser, updateUser, getById }

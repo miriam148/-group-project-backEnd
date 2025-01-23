@@ -4,15 +4,18 @@ const { tokenGenerate } = require('../utils/utils')
 
 const signup = async (req, res) => {
 try {
-    const { name, lastname, address, phoneNumber, email, password, role} = req.body
+    const { name, lastname, road, postCode, city, phoneNumber, email, password, role, subscription} = req.body
     const newUser = {
         name,
         lastname,
-        address,
+        road,
+        postCode,
+        city,
         phoneNumber,
         email,
         password: await bcrypt.hash(password, 10),
-        role
+        role,
+        subscription
     }
     await userModel.create(newUser);
     res.status(200).send("Usuario creado correctamente")
