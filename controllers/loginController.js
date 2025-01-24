@@ -1,11 +1,12 @@
-const userModel = require("../controllers/usersController")
+const userModel = require("../models/usersModels")
 const bcrypt = require('bcrypt')
 const { tokenGenerate } = require('../utils/utils')
 
 const signup = async (req, res) => {
 try {
-    const { name, lastname, road, postCode, city, phoneNumber, email, password, role, subscription} = req.body
-    const newUser = {
+    const { name, lastname, road, postCode, city, phoneNumber, email, password, role, subscription} = req.body;
+    //comprobar si existe usuario
+    const newUser = new userModel( {
         name,
         lastname,
         road,
@@ -16,9 +17,12 @@ try {
         password: await bcrypt.hash(password, 10),
         role,
         subscription
-    }
-    await userModel.create(newUser);
-    res.status(200).send("Usuario creado correctamente")
+    }) 
+   
+    console.log(newUser)
+    // await userModel.create(newUser);
+    await newUser.save()
+    res.status(201).send("Usuario creado correctamente")
 } catch (error) {
 
     if (error.code === 11000) {

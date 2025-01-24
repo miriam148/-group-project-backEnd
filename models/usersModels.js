@@ -49,7 +49,7 @@ const userSchema = new Schema({
   },
   subscription: {
     type: String,
-    required: [true, "la suscripción es obligatoria"],
+    default: "monthly"
 
   },
   favoritas: {
