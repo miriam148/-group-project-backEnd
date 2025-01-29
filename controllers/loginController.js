@@ -1,18 +1,21 @@
-const userModel = require("../controllers/usersController")
+const userModel = require("../models/usersModels")
 const bcrypt = require('bcrypt')
 const { tokenGenerate } = require('../utils/utils')
 
 const signup = async (req, res) => {
 try {
-    const { name, lastname, address, phoneNumber, email, password, role} = req.body
+    const { name, lastname, phoneNumber,road, postCode,city, email, password, role, favoritas} = req.body
     const newUser = {
         name,
         lastname,
-        address,
         phoneNumber,
+        road,
+        postCode,
+        city,
         email,
         password: await bcrypt.hash(password, 10),
-        role
+        role,
+        favoritas
     }
     await userModel.create(newUser);
     res.status(200).send("Usuario creado correctamente")
