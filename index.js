@@ -6,8 +6,10 @@ const loginRouter = require ('./routes/loginRoutes')
 require('dotenv').config()
 const connectToDB = require ('./db/db')
 const app = express();
-app.use(express.json());
 app.use(cors());
+
+app.use(express.json());
+
 
 
 connectToDB()
