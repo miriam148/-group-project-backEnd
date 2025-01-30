@@ -56,6 +56,15 @@ const getById = async (req, res) => {
 
 };
 
+const getAllUsers = async (req,res) => {
+    try {
+        const users = await userModel.find(); // Aquí debería ser la consulta correcta a la base de datos
+        res.json(users);
+    } catch (error) {
+        res.status(500).send({ status: 'failed', error: error.message })
 
+    }
+}
 
-module.exports = { addUser, deleteUser, updateUser, getById }
+module.exports = {  addUser, deleteUser, updateUser, getById, getAllUsers }
+
