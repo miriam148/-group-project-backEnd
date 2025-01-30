@@ -4,8 +4,14 @@ const { tokenGenerate } = require('../utils/utils')
 
 const signup = async (req, res) => {
 try {
-    const { name, lastname, phoneNumber,road, postCode,city, email, password, role, favoritas} = req.body
-    const newUser = {
+
+    console.log(req.body);
+    const { name, lastname, phoneNumber, road, postCode, city,  email, password, role, subscription} = req.body;
+    const existsUser = await userModel.findOne({ email });
+      if (existsUser) {
+          return res.status(400).json({ message: "El email ya está registrado." });
+      }
+    const newUser = new userModel( {
         name,
         lastname,
         phoneNumber,
@@ -15,22 +21,23 @@ try {
         email,
         password: await bcrypt.hash(password, 10),
         role,
-        favoritas
-    }
-    await userModel.create(newUser);
-    res.status(200).send("Usuario creado correctamente")
+        subscription
+    }) 
+   
+    console.log(newUser)
+    await newUser.save()
+    res.status(201).send("Usuario creado correctamente")
 } catch (error) {
 
     if (error.code === 11000) {
         return res
-        .status(500)
+        .status(409)
         .send({ status: "Failed", error: "El usuario ya existe" })
     }
 
     res.status(500).send({ status: "failed", error: error.message })
     
-}
-}
+}}
 
 
 const login = async (req, res) => {

@@ -12,8 +12,6 @@ const addUser = async (req, res) => {
 }
 
 
-
-
 const deleteUser = async (req, res) => {
     try {
         const idUser = req.params.idUser

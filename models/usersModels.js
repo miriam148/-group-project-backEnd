@@ -48,9 +48,13 @@ const userSchema = new Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  subscription: {
+    type: String,
+    default: "monthly",
+  },
   favoritas: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "movie",
+    ref: "User",
   },
   createAt: {
     type: Date,
