@@ -52,10 +52,6 @@ const userSchema = new Schema({
     type: String,
     default: "monthly",
   },
-  favoritas: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
-  },
   createAt: {
     type: Date,
     default: Date.now(),
